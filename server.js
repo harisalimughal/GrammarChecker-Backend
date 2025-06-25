@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors(
   {
-    origin: ['http://localhost:3000', 'https://your-frontend.vercel.app'],
+    origin: ['http://localhost:3000', 'https://grammar-checker-frontend-git-main-harisalimughals-projects.vercel.app/'],
     credentials: true
   }
 ));
