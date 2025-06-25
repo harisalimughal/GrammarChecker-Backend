@@ -10,7 +10,10 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: true,
+  origin: [
+    'http://localhost:3000', // for local development
+    'https://grammar-checker-frontend-git-main-harisalimughals-projects.vercel.app' // your deployed frontend
+  ],
   credentials: true
 }));
 app.use(express.json());
