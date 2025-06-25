@@ -9,10 +9,15 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors(
+  {
+    origin: ['http://localhost:3000', 'https://your-frontend.vercel.app'],
+    credentials: true
+  }
+));
 app.use(express.json());
 
-// Simple in-memory user storage (in production, use a database)
+// Simple in-memory user storage 
 const users = [
   {
     id: 1,
@@ -147,6 +152,12 @@ app.post('/check-grammar', authenticateToken, async (req, res) => {
     res.status(500).json({ error: 'Failed to check grammar' });
   }
 });
+
+// backend check
+app.get('/', (req, res) => {
+  res.send('GrammarChecker Backend is running 🚀');
+});
+
 
 // Health check endpoint
 app.get('/health', (req, res) => {
