@@ -9,10 +9,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors({
-  origin: true,
-  credentials: true
-}));
+app.use(cors(
+  {
+    origin: ['http://localhost:3000', 'https://grammar-checker-frontend-git-main-harisalimughals-projects.vercel.app'],
+    credentials: true
+  }
+));
 app.use(express.json());
 
 // Simple in-memory user storage 
