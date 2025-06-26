@@ -8,13 +8,27 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors(
-  {
-    origin: ['http://localhost:3000', 'https://grammar-checker-frontend.vercel.app/'],
-    credentials: true
-  }
-));
+// CORS setup
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://grammar-checker-frontend.vercel.app',
+  'https://grammar-checker-frontend-git-main-harisalimughals-projects.vercel.app'
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));  // Explicitly handle preflight
+
 app.use(express.json());
 
 // Simple in-memory user storage 
